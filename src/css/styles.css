@@ -1,0 +1,33 @@
+.thumbnail-product{
+    width: 100%;
+    padding: 5px;
+}
+
+.post-form-image {
+}
+
+.post-form-image #result{
+    display: flex;
+    flex-wrap: wrap;
+}
+.post-form-image #result div{
+    display: flex;
+    width: 25%;
+    padding: 3px;
+    position: relative;
+}
+
+.btn-delete-img{
+    position: absolute;
+    display: inline-block;
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 2px;
+    right: 2px;
+    top: 2px;
+}
+
+.btn-delete-img:hover{
+    color: rgb(216, 37, 37);
+}
