@@ -6,6 +6,41 @@
 .post-form-image {
 }
 
+.close-form{
+    transform: scale(0);
+    transition: 0.4s all;
+}
+
+.show{
+    transform: scale(1);
+    transition: 0.4s all;
+}
+
+.animation{
+    transform: translateY(-10rem);
+    transition: 0.4s all;
+}
+
+.animation-trip{
+    transform: translateY(-6rem);
+    transition: 0.4s all;
+}
+
+.level{
+    text-align: center;
+}
+
+.level span{
+    padding: 0.1rem 0.5rem;
+    font-size: 1rem;
+}
+
+.table-show{
+    transform:translateY(0);
+    transition: 0.4s all;
+}
+
+
 .post-form-image #result{
     display: flex;
     flex-wrap: wrap;

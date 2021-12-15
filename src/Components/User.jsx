@@ -8,7 +8,7 @@ export default function User() {
       <li className="nav-item dropdown no-arrow">
         <a
           className="nav-link dropdown-toggle"
-          href="#"
+          href="/"
           id="userDropdown"
           role="button"
           data-toggle="dropdown"
@@ -18,7 +18,7 @@ export default function User() {
           <span className="mr-2 d-none d-lg-inline text-gray-600 small">
             Douglas McGee
           </span>
-          <img className="img-profile rounded-circle" src={ava} />
+          <img className="img-profile rounded-circle" src={ava} alt='ava' />
         </a>
       </li>
     </ul>

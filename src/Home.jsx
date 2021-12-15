@@ -1,11 +1,11 @@
 export default function Home() {
 
-  const test=()=>{
-    fetch("http://localhost:8080/chuyenxe/all").then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-    })
-  }
+  // const test=()=>{
+  //   fetch("http://localhost:8080/chuyenxe/all").then(res=>res.json())
+  //   .then(data=>{
+  //     console.log(data);
+  //   })
+  // }
 
   return (
     <>
@@ -17,7 +17,6 @@ export default function Home() {
         </div>
         <div className="card shadow mb-4">
           <h1>Hello</h1>
-          <button onClick={test}>test</button>
         </div>
       </div>
     </>

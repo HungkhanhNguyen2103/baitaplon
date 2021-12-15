@@ -5,19 +5,22 @@ import Footer from "./Components/Footer";
 import Search from "./Components/Search";
 import User from "./Components/User";
 import Bus from "./Components/Tables/Bus";
+import Buses from "./Components/Tables/Buses";
+import Driver from "./Components/Tables/Driver";
+import Trip from "./Components/Tables/Trip";
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <div>
         {/* Page Wrapper */}
         <div id="wrapper">
           {/* Sidebar */}
-          <Navigation />
-          {/* <Routes>
-                  <Route path="" element={<Home/>}/> 
-                  <Route path="tablesBus" element={<Footer/>}/> 
-                </Routes> */}
+          <Navigation 
+            // handleClickBuses={handleClickBuses}
+          />
           <div id="content-wrapper" className="d-flex flex-column">
             {/* Main Content */}
             <div id="content">
@@ -34,6 +37,9 @@ function App() {
               <Routes>
                 <Route path="" element={<Home/>}/>
                 <Route path="tablesBus" element={<Bus/>}/>
+                <Route path="tablesBuses" element={<Buses/>}/>
+                <Route path="tablesDriver" element={<Driver/>}/>
+                <Route path="tablesTrip" element={<Trip/>}/>
               </Routes>
             </div>
             {/* End of Main Content */}

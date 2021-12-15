@@ -2,26 +2,21 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from 'sweetalert';
 
-export default function Bus() {
+export default function Trip() {
 
   const [toggleTask,setToggleTask] = useState(false)
 
   //listBus
-  const [listBus, setListBus] = useState([]);
+  const [listRoute, setListRoute] = useState([]);
 
   //isEdit
   const [isEdit,setIsEdit] = useState(false)
 
   //lay truong input
   const [field,setField] = useState({
-    bienso : "",
-    mauxe : "",
-    hangsx : "",
-    doixe : "",
-    model : "",
-    soghe : "",
-    sonamsudung : "",
-    ngaybaoduong : ""
+    lotrinh : "",
+    dodai : "",
+    dophuctap : ""
   });
 
 
@@ -32,22 +27,17 @@ export default function Bus() {
   const handleClose=()=>{
     setToggleTask(!toggleTask)
     setField({
-      bienso : "",
-      mauxe : "",
-      hangsx : "",
-      doixe : "",
-      model : "",
-      soghe : "",
-      sonamsudung : "",
-      ngaybaoduong : ""
+      lotrinh : "",
+      dodai : "",
+      dophuctap : ""
     })
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/bus/all`)
+    axios.get(`http://localhost:8080/route/all`)
     .then(res=>{
-      setListBus(res.data);
-      console.log(res);
+      setListRoute(res.data);
+      console.log(res.data);
     })
     .catch(err=>{
       console.log(err);
@@ -64,7 +54,7 @@ export default function Bus() {
   //submit item
   const onSubmitField=(e)=>{
     e.preventDefault();
-    const bienso  = listBus.every(item => item.bienso !== field.bienso)
+    const bienso  = listRoute.every(item => item.bienso !== field.bienso)
     const doixe = Number(field.doixe) % 1 === 0 
     const soghe = Number(field.soghe) % 1 === 0 
     const sonamsudung = Number(field.sonamsudung) % 1 === 0 
@@ -151,38 +141,26 @@ export default function Bus() {
     <div className="container-fluid">
       {/* Page Heading */}
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Bảng cơ sở dữ liệu xe khách</h1>
+        <h1 className="h3 mb-0 text-gray-800">Bảng cơ sở dữ liệu tuyến đường</h1>
       </div>
       <div className={!toggleTask ? ("card shadow mb-4 close-form") : ("card shadow mb-4 show")}>
       <div className="card-header py-3 d-flex justify-content-center ">
       <form className="form w-100" onSubmit={onSubmitField}>
         <div className="row">
           <div className="col-3">
-            <input type="text" className="form-control" name="bienso" value={field.bienso} placeholder="Biển số" onChange={actionAddItem}/>
+            <input type="text" className="form-control" name="lotrinh" value={field.lotrinh} placeholder="Lộ trình" onChange={actionAddItem}/>
           </div>
           <div className="col-3">
-            <input type="text" className="form-control" name="mauxe" value={field.mauxe} placeholder="Màu xe" onChange={actionAddItem}/>
+            <input type="text" className="form-control" name="dodai" value={field.dodai} placeholder="Độ dài" onChange={actionAddItem}/>
           </div>
           <div className="col-3">
-            <input type="text" className="form-control" name="hangsx" value={field.hangsx} placeholder="Hãng sản xuất"  onChange={actionAddItem}/>
-          </div>
-          <div className="col-3">
-            <input type="text" className="form-control" name="doixe" value={field.doixe} placeholder="Đời xe"  onChange={actionAddItem}/>
-          </div>     
-        </div>
-        <div className="row my-3">
-        <div className="col">
-            <input type="text" className="form-control" onChange={actionAddItem} name="model" value={field.model} placeholder="Model" />
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" onChange={actionAddItem} name="soghe" value={field.soghe} placeholder="Số ghế" />
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" onChange={actionAddItem} name="sonamsudung" value={field.sonamsudung} placeholder="Năm sử dụng" />
-          </div>
-          <div className="col">
-            <input type="date" className="form-control" onChange={actionAddItem} name="ngaybaoduong" value={field.ngaybaoduong} placeholder="Ngày bảo dưỡng" />
-          </div>
+                <select className="form-control" onChange={actionAddItem} name="dophuctap" value={field.dophuctap}>
+                  <option  className="d-none">Độ phức tạp</option>
+                  <option value='1'>Small</option>
+                  <option value='2'>Medium</option>
+                  <option value='3'>High</option>
+                </select>
+          </div>  
           <div className="col">
             <input type="Submit" className="btn btn-success" defaultValue="Submit" />
           </div>
@@ -190,9 +168,9 @@ export default function Bus() {
       </form>
       </div>
       </div>
-      <div className={!toggleTask ? "card shadow mb-4 animation" : "card shadow mb-4 table-show"}>
+      <div className={!toggleTask ? "card shadow mb-4 animation-trip" : "card shadow mb-4 table-show"}>
         <div className="card-header py-3 d-flex justify-content-between">
-          <h6 className="m-0 font-weight-bold text-primary">DataTables Bus</h6>
+          <h6 className="m-0 font-weight-bold text-primary">DataTables Route</h6>
           <button className={!toggleTask ? ("btn btn-info") : ("d-none")} onClick={handleAdd}>Add item</button>
           <button className={toggleTask ? ("btn btn-secondary") : ("d-none")} onClick={handleClose}>Close task</button>
         </div>
@@ -206,42 +184,37 @@ export default function Bus() {
             >
               <thead>
                 <tr>
-                  <th>Biển số</th>
-                  <th>Màu xe</th>
-                  <th>Hãng sản xuất</th>
-                  <th>Đời xe</th>
-                  <th>Model</th>
-                  <th>Số ghế</th>
-                  <th>Năm sử dụng</th>
-                  <th>Ngày bảo dưỡng</th>
+                  <th>Lộ trình</th>
+                  <th>Độ dài (km)</th>
+                  <th>Độ phức tạp</th>
                   <th></th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Biển số</th>
-                  <th>Màu xe</th>
-                  <th>Hãng sản xuất</th>
-                  <th>Đời xe</th>
-                  <th>Model</th>
-                  <th>Số ghế</th>
-                  <th>Năm sử dụng</th>
-                  <th>Ngày bảo dưỡng</th>
+                  <th>Lộ trình</th>
+                  <th>Độ dài (km)</th>
+                  <th>Độ phức tạp</th>
                   <th></th>
                 </tr>
               </tfoot>
               <tbody>
-              {listBus.length !== 0 ? (
-                  listBus.map((item,key) => (
+              {listRoute.length !== 0 ? (
+                  listRoute.map((item,key) => (
                     <tr key={key}>
-                      <td>{item.bienso}</td>
-                      <td>{item.mauxe}</td>
-                      <td>{item.hangsx}</td>
-                      <td>{item.doixe}</td>
-                      <td>{item.model}</td>
-                      <td>{item.soghe}</td>
-                      <td>{item.sonamsudung}</td>
-                      <td>{item.ngaybaoduong}</td>
+                      <td>{item.lotrinh}</td>
+                      <td>{item.dodai}</td>
+                      <td className="level">
+                      {
+                        item.dophuctap === 1 ? (
+                          <span className="badge badge-success">small</span>
+                        ) : item.dophuctap === 2 ?  (
+                          <span className="badge badge-warning">medium</span>
+                        ) : (
+                          <span className="badge badge-danger">high</span>
+                        )
+                      }
+                      </td>
                       <td>
                         <input
                           className="btn btn-warning"
