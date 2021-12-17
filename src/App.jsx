@@ -2,14 +2,45 @@ import Home from "./Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 import Footer from "./Components/Footer";
-import Search from "./Components/Search";
 import User from "./Components/User";
 import Bus from "./Components/Tables/Bus";
 import Buses from "./Components/Tables/Buses";
 import Driver from "./Components/Tables/Driver";
 import Trip from "./Components/Tables/Trip";
+import { useState } from "react";
 
 function App() {
+
+  const [toggleNav,setToggleNav] = useState({
+    bus : false,
+    buses : false,
+    driver : false,
+    route : false,
+  })
+
+  const handleToggleRoute=()=>{
+    setToggleNav({
+      route : true,
+    })
+  }
+
+  const handleToggleBus=()=>{
+    setToggleNav({
+      bus : true,
+    })
+  }
+
+  const handleToggleBuses=()=>{
+    setToggleNav({
+      buses : true,
+    })
+  }
+
+  const handleToggleDriver=()=>{
+    setToggleNav({
+      driver : true,
+    })
+  }
 
 
   return (
@@ -19,7 +50,7 @@ function App() {
         <div id="wrapper">
           {/* Sidebar */}
           <Navigation 
-            // handleClickBuses={handleClickBuses}
+            toggleNav={toggleNav}
           />
           <div id="content-wrapper" className="d-flex flex-column">
             {/* Main Content */}
@@ -27,19 +58,17 @@ function App() {
               {/* Topbar */}
               <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 {/* Sidebar Toggle (Topbar) */}
-                {/* Topbar Search */}
-                <Search />
-                {/* Topbar Navbar */}
+                
                 {/* Nav Item - User Information */}
                 <User />
               </nav>
               {/* End of Topbar */}
               <Routes>
                 <Route path="" element={<Home/>}/>
-                <Route path="tablesBus" element={<Bus/>}/>
-                <Route path="tablesBuses" element={<Buses/>}/>
-                <Route path="tablesDriver" element={<Driver/>}/>
-                <Route path="tablesTrip" element={<Trip/>}/>
+                <Route path="tablesBus" element={<Bus handleToggleBus={handleToggleBus}/>}/>
+                <Route path="tablesBuses" element={<Buses handleToggleBuses={handleToggleBuses}/>}/>
+                <Route path="tablesDriver" element={<Driver handleToggleDriver={handleToggleDriver}/>}/>
+                <Route path="tablesTrip" element={<Trip handleToggleRoute={handleToggleRoute}/>}/>
               </Routes>
             </div>
             {/* End of Main Content */}

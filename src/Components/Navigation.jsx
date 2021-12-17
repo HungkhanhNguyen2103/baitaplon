@@ -1,3 +1,4 @@
+
 export default function Navigation(props){
 
     return(
@@ -12,7 +13,7 @@ export default function Navigation(props){
         {/* Divider */}
         <hr className="sidebar-divider my-0" />
         {/* Nav Item - Dashboard */}
-        <li className="nav-item active">
+        <li className="nav-item">
           <a className="nav-link" href="/">
             <i className="fas fa-fw fa-tachometer-alt" />
             <span>Dashboard</span></a>
@@ -44,25 +45,25 @@ export default function Navigation(props){
           Table
         </div>
         {/* Nav Item - Bus */}
-        <li className="nav-item">
+        <li className={ props.toggleNav.bus ? ("nav-item active") : ("nav-item")}>
           <a className="nav-link" href="/tablesBus">
             <i className="fas fa-fw fa-bus" />
             <span>Xe Khách</span></a>
         </li>
         {/* Nav Item - Buses */}
-        <li className="nav-item">
+        <li className={ props.toggleNav.buses ? ("nav-item active") : ("nav-item")}>
           <a className="nav-link" href="/tablesBuses" >
             <i className="fas fa-fw fa-tachometer-alt" />
             <span>Chuyến Xe</span></a>
         </li>
         {/* Nav Item - Driver */}
-        <li className="nav-item">
+        <li className={ props.toggleNav.driver ? ("nav-item active") : ("nav-item")}>
           <a className="nav-link" href="/tablesDriver">
             <i className="fas fa-fw fa-users" />
             <span>Tài Xế</span></a>
         </li>
         {/* Nav Item - Route */}
-        <li className="nav-item">
+        <li className={ props.toggleNav.route ? ("nav-item active") : ("nav-item")}>
           <a className="nav-link" href="/tablesTrip">
             <i className="fas fa-fw fa-road" />
             <span>Tuyến Đường</span></a>

@@ -1,16 +1,23 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from 'sweetalert';
+import Search from "../Search";
 
-export default function Bus() {
+export default function Bus(props) {
 
   const [toggleTask,setToggleTask] = useState(false)
 
   //listBus
   const [listBus, setListBus] = useState([]);
 
+  //listBus
+  const [listBusSave, setListBusSave] = useState([]);
+
   //isEdit
   const [isEdit,setIsEdit] = useState(false)
+
+  //search
+  const [searchKey,setSearchKey] = useState("")
 
   //lay truong input
   const [field,setField] = useState({
@@ -47,12 +54,18 @@ export default function Bus() {
     axios.get(`http://localhost:8080/bus/all`)
     .then(res=>{
       setListBus(res.data);
-      console.log(res);
+      setListBusSave(res.data);
+      // console.log(res);
     })
     .catch(err=>{
       console.log(err);
     })
+    props.handleToggleBus()
   }, [])
+
+  // useEffect(() => {
+  //   props.handleToggleBus();
+  // }, [props])
 
   const actionAddItem=(e)=>{
       const {name,value} = e.target;
@@ -65,9 +78,7 @@ export default function Bus() {
   const onSubmitField=(e)=>{
     e.preventDefault();
     const bienso  = listBus.every(item => item.bienso !== field.bienso)
-    const doixe = Number(field.doixe) % 1 === 0 
-    const soghe = Number(field.soghe) % 1 === 0 
-    const sonamsudung = Number(field.sonamsudung) % 1 === 0 
+
     if(field.bienso === '' || field.mauxe === '' || field.hangsx === '' || field.doixe === '' ||
        field.model === '' || field.soghe === '' || field.sonamsudung === '' || field.ngaybaoduong === '' ){
         swal("Nhập đầy đủ trường !")
@@ -75,15 +86,6 @@ export default function Bus() {
     else if(!bienso && !isEdit){
       swal("Biển số xe đã sử dụng !")
     }   
-    else if(!doixe){
-      swal("Thêm đời xe không chính xác !")
-    }
-    else if(!soghe){
-      swal("Số ghế không chính xác !")
-    }
-    else if(!sonamsudung){
-      swal("Số năm sử dụng không chính xác !")
-    }
     else{
         axios.post("http://localhost:8080/bus",field)
           .then(res =>{
@@ -147,11 +149,28 @@ export default function Bus() {
     setIsEdit(true)
   }
 
+  //Search
+  const actionSearch=(e)=>{
+    const value = e.target.value;
+    const search = new RegExp (value ,'i');
+    setSearchKey(search)
+  }
+
+  const handleSearch=()=>{
+      setListBus(listBusSave.filter(item=>item.bienso.match(searchKey)))
+  }
+
   return (
     <div className="container-fluid">
       {/* Page Heading */}
-      <div className="d-sm-flex align-items-center justify-content-between mb-4">
+      <div className="d-sm-flex d-flex justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Bảng cơ sở dữ liệu xe khách</h1>
+        {/* Topbar Search */}
+        <Search 
+        actionSearch={actionSearch}
+        handleSearch={handleSearch}
+        />
+        {/* Topbar Navbar */}
       </div>
       <div className={!toggleTask ? ("card shadow mb-4 close-form") : ("card shadow mb-4 show")}>
       <div className="card-header py-3 d-flex justify-content-center ">
@@ -167,7 +186,7 @@ export default function Bus() {
             <input type="text" className="form-control" name="hangsx" value={field.hangsx} placeholder="Hãng sản xuất"  onChange={actionAddItem}/>
           </div>
           <div className="col-3">
-            <input type="text" className="form-control" name="doixe" value={field.doixe} placeholder="Đời xe"  onChange={actionAddItem}/>
+            <input type="number" className="form-control" name="doixe" value={field.doixe} placeholder="Đời xe"  onChange={actionAddItem}/>
           </div>     
         </div>
         <div className="row my-3">
@@ -175,10 +194,10 @@ export default function Bus() {
             <input type="text" className="form-control" onChange={actionAddItem} name="model" value={field.model} placeholder="Model" />
           </div>
           <div className="col">
-            <input type="text" className="form-control" onChange={actionAddItem} name="soghe" value={field.soghe} placeholder="Số ghế" />
+            <input type="number" className="form-control" onChange={actionAddItem} name="soghe" value={field.soghe} placeholder="Số ghế" />
           </div>
           <div className="col">
-            <input type="text" className="form-control" onChange={actionAddItem} name="sonamsudung" value={field.sonamsudung} placeholder="Năm sử dụng" />
+            <input type="number" className="form-control" onChange={actionAddItem} name="sonamsudung" value={field.sonamsudung} placeholder="Năm sử dụng" />
           </div>
           <div className="col">
             <input type="date" className="form-control" onChange={actionAddItem} name="ngaybaoduong" value={field.ngaybaoduong} placeholder="Ngày bảo dưỡng" />

@@ -1,16 +1,23 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from 'sweetalert';
+import Search from "../Search";
 
-export default function Driver() {
+export default function Driver(props) {
 
   const [toggleTask,setToggleTask] = useState(false)
 
-  //listBus
+  //list
   const [listDriver, setListDriver] = useState([]);
+
+  //listSave
+  const [listDriverSave, setListDriverSave] = useState([]);
 
   //isEdit
   const [isEdit,setIsEdit] = useState(false)
+
+  //search
+  const [searchKey,setSearchKey] = useState("")
 
   //lay truong input
   const [field,setField] = useState({
@@ -45,12 +52,15 @@ export default function Driver() {
     axios.get(`http://localhost:8080/driver/all`)
     .then(res=>{
       setListDriver(res.data);
-      console.log(res);
+      setListDriverSave(res.data);
+      // console.log(res);
     })
     .catch(err=>{
       console.log(err);
     })
+    // props.handleToggleDriver();
   }, [])
+
 
   const actionAddItem=(e)=>{
       const {name,value} = e.target;
@@ -64,9 +74,6 @@ export default function Driver() {
     e.preventDefault();
     const cccd  = listDriver.every(item => item.cccd !== Number(field.cccd))
     const mabang  = listDriver.every(item => item.mabang !== Number(field.mabang))
-    const cccdNum = Number(field.cccd) % 1 === 0 
-    const mabangNum = Number(field.mabang) % 1 === 0 
-    const thamnien = Number(field.thamnien) % 1 === 0 
     if(field.cccd === '' || field.mabang === '' || field.thamnien === '' || field.ten === '' ||
        field.loaibang === '' || field.diachi === '' || field.ngaysinh === ''  ){
         swal("Nhập đầy đủ trường !")
@@ -77,15 +84,6 @@ export default function Driver() {
     else if(!mabang  && !isEdit){
       swal("Mã bằng đã sử dụng !")
     } 
-    else if(!cccdNum){
-      swal("Thêm Căn cước công dân không chính xác !")
-    }
-    else if(!mabangNum){
-      swal("Thêm mã bằng không chính xác !")
-    }
-    else if(!thamnien){
-      swal("Thâm niên không chính xác !")
-    }
     else{
         axios.post("http://localhost:8080/driver",field)
           .then(res =>{
@@ -149,11 +147,28 @@ export default function Driver() {
     setIsEdit(true)
   }
 
+  //Search
+  const actionSearch=(e)=>{
+    const value = e.target.value;
+    const search = new RegExp (value ,'i');
+    setSearchKey(search)
+  }
+
+  const handleSearch=()=>{
+      setListDriver(listDriverSave.filter(item=>item.ten.match(searchKey)))
+  }
+
   return (
     <div className="container-fluid">
       {/* Page Heading */}
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Bảng cơ sở dữ liệu tài xế</h1>
+        {/* Topbar Search */}
+        <Search
+         actionSearch={actionSearch}
+         handleSearch={handleSearch}
+        />
+        {/* Topbar Navbar */}
       </div>
       <div className={!toggleTask ? ("card shadow mb-4 close-form") : ("card shadow mb-4 show")}>
       <div className="card-header py-3 d-flex justify-content-center ">
@@ -163,10 +178,10 @@ export default function Driver() {
             <input type="text" className="form-control" name="ten" value={field.ten} placeholder="Họ tên" onChange={actionAddItem}/>
           </div>
           <div className="col-3">
-            <input type="text" className="form-control" name="cccd" value={field.cccd} placeholder="CCCD" onChange={actionAddItem}/>
+            <input type="number" className="form-control" name="cccd" value={field.cccd} placeholder="CCCD" onChange={actionAddItem}/>
           </div>
           <div className="col-3">
-            <input type="text" className="form-control" name="mabang" value={field.mabang} placeholder="Mã bằng"  onChange={actionAddItem}/>
+            <input type="number" className="form-control" name="mabang" value={field.mabang} placeholder="Mã bằng"  onChange={actionAddItem}/>
           </div>
           <div className="col-3">
             <input type="text" className="form-control" name="loaibang" value={field.loaibang} placeholder="Loại bằng"  onChange={actionAddItem}/>
@@ -180,7 +195,7 @@ export default function Driver() {
             <input type="date" className="form-control" onChange={actionAddItem} name="ngaysinh" value={field.ngaysinh} placeholder="Ngày sinh" />
           </div>
           <div className="col">
-            <input type="text" className="form-control" onChange={actionAddItem} name="thamnien" value={field.thamnien} placeholder="Thâm niên" />
+            <input type="number" className="form-control" onChange={actionAddItem} name="thamnien" value={field.thamnien} placeholder="Thâm niên" />
           </div>
           <div className="col">
             <input type="Submit" className="btn btn-success" defaultValue="Submit" />

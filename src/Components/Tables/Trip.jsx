@@ -1,16 +1,23 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from 'sweetalert';
+import Search from "../Search";
 
-export default function Trip() {
+export default function Trip(props) {
 
   const [toggleTask,setToggleTask] = useState(false)
 
-  //listBus
+  //list
   const [listRoute, setListRoute] = useState([]);
+
+  //listSave
+  const [listRouteSave, setListRouteSave] = useState([]);
 
   //isEdit
   const [isEdit,setIsEdit] = useState(false)
+
+  //search
+  const [searchKey,setSearchKey] = useState("")
 
   //lay truong input
   const [field,setField] = useState({
@@ -37,12 +44,17 @@ export default function Trip() {
     axios.get(`http://localhost:8080/route/all`)
     .then(res=>{
       setListRoute(res.data);
-      console.log(res.data);
+      setListRouteSave(res.data)
+      // console.log(res.data);
     })
     .catch(err=>{
       console.log(err);
     })
   }, [])
+
+  // useEffect(() => {
+  //   props.handleToggleRoute();
+  // }, [props])
 
   const actionAddItem=(e)=>{
       const {name,value} = e.target;
@@ -54,28 +66,12 @@ export default function Trip() {
   //submit item
   const onSubmitField=(e)=>{
     e.preventDefault();
-    const bienso  = listRoute.every(item => item.bienso !== field.bienso)
-    const doixe = Number(field.doixe) % 1 === 0 
-    const soghe = Number(field.soghe) % 1 === 0 
-    const sonamsudung = Number(field.sonamsudung) % 1 === 0 
-    if(field.bienso === '' || field.mauxe === '' || field.hangsx === '' || field.doixe === '' ||
-       field.model === '' || field.soghe === '' || field.sonamsudung === '' || field.ngaybaoduong === '' ){
+    if(field.lotrinh === '' || field.dodai === '' || field.dophuctap === ''){
         swal("Nhập đầy đủ trường !")
-       }
-    else if(!bienso && !isEdit){
-      swal("Biển số xe đã sử dụng !")
-    }   
-    else if(!doixe){
-      swal("Thêm đời xe không chính xác !")
-    }
-    else if(!soghe){
-      swal("Số ghế không chính xác !")
-    }
-    else if(!sonamsudung){
-      swal("Số năm sử dụng không chính xác !")
-    }
+       } 
+      //  console.log(field);  
     else{
-        axios.post("http://localhost:8080/bus",field)
+        axios.post("http://localhost:8080/route",field)
           .then(res =>{
               console.log(res);
           })
@@ -99,21 +95,20 @@ export default function Trip() {
           setTimeout(() => {
             window.location.reload();
           }, 1600);
-    }
-    
+    }  
   }
 
   //delete item
   const handleDelete=(value)=>{
     swal({
-      title: `Bạn có muốn xóa xe khách biển số ${value.bienso}?`,
+      title: `Bạn có muốn xóa tuyến ${value.lotrinh}?`,
       icon: "warning",
       buttons: true,
       dangerMode: true,
     })
     .then((willDelete) => {
       if (willDelete) {
-          axios.delete(`http://localhost:8080/bus/${value.idxekhach}`,{data : value})
+          axios.delete(`http://localhost:8080/route/${value.idtuyenxe}`,{data : value})
             .then(res=>{
                 console.log(res);
                 })
@@ -137,21 +132,38 @@ export default function Trip() {
     setIsEdit(true)
   }
 
+  //Search
+  const actionSearch=(e)=>{
+    const value = e.target.value;
+    const search = new RegExp (value ,'i');
+    setSearchKey(search)
+  }
+
+  const handleSearch=()=>{
+      setListRoute(listRouteSave.filter(item=>item.lotrinh.match(searchKey)))
+  }
+
   return (
     <div className="container-fluid">
       {/* Page Heading */}
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Bảng cơ sở dữ liệu tuyến đường</h1>
+        {/* Topbar Search */}
+        <Search
+        actionSearch={actionSearch}
+        handleSearch={handleSearch}
+        />
+        {/* Topbar Navbar */}
       </div>
       <div className={!toggleTask ? ("card shadow mb-4 close-form") : ("card shadow mb-4 show")}>
       <div className="card-header py-3 d-flex justify-content-center ">
       <form className="form w-100" onSubmit={onSubmitField}>
         <div className="row">
-          <div className="col-3">
+          <div className="col-4">
             <input type="text" className="form-control" name="lotrinh" value={field.lotrinh} placeholder="Lộ trình" onChange={actionAddItem}/>
           </div>
           <div className="col-3">
-            <input type="text" className="form-control" name="dodai" value={field.dodai} placeholder="Độ dài" onChange={actionAddItem}/>
+            <input type="number" className="form-control" name="dodai" value={field.dodai} placeholder="Độ dài" onChange={actionAddItem}/>
           </div>
           <div className="col-3">
                 <select className="form-control" onChange={actionAddItem} name="dophuctap" value={field.dophuctap}>
