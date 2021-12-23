@@ -1,3 +1,7 @@
+*{
+    scroll-behavior:smooth;
+}
+
 .thumbnail-product{
     width: 100%;
     padding: 5px;
@@ -14,7 +18,10 @@
 .show{
     transform: scale(1);
     transition: 0.4s all;
+    position: relative;
 }
+
+
 
 .animation{
     transform: translateY(-10rem);
@@ -24,6 +31,19 @@
 .animation-trip{
     transform: translateY(-6rem);
     transition: 0.4s all;
+}
+
+.animation-pay{
+    transform: translateY(-13rem);
+    transition: 0.4s all;
+}
+
+/* .info{
+    text-align: center;
+} */
+
+.info p{
+    margin-bottom: 0.3rem !important;
 }
 
 .level{
@@ -47,6 +67,16 @@
     transition: 0.4s all;
 }
 
+
+
+ul.route{
+    list-style: none;
+    max-height: 4rem;
+}
+
+ul.route li{
+    margin: 3px 0;
+}
 
 .post-form-image #result{
     display: flex;

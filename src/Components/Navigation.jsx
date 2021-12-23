@@ -14,28 +14,22 @@ export default function Navigation(props){
         <hr className="sidebar-divider my-0" />
         {/* Nav Item - Dashboard */}
         <li className="nav-item">
-          <a className="nav-link" href="/">
-            <i className="fas fa-fw fa-tachometer-alt" />
-            <span>Dashboard</span></a>
+          <a className="nav-link" href="/Turnover">
+
+            <i className="fas fa-fw fa-credit-card" />
+            <span>Doanh thu</span></a>
         </li>
         {/* Divider */}
         <hr className="sidebar-divider" />
         {/* Heading */}
         <div className="sidebar-heading">
-          Interface
+          Bảng Lương
         </div>
         {/* Nav Item - Pages Collapse Menu */}
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/" data-toggle="collapse" data-target="#collapseTwo"  aria-controls="collapseTwo">
-            <i className="fas fa-fw fa-cog" />
-            <span>Components</span>
-          </a>
-        </li>
-        {/* Nav Item - Utilities Collapse Menu */}
-        <li className="nav-item">
-          <a className="nav-link collapsed" href="/" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i className="fas fa-fw fa-wrench" />
-            <span>Utilities</span>
+          <a className="nav-link collapsed" href="/Pay" >
+            <i className="fas fa-fw fa-table" />
+            <span>Tài xế</span>
           </a>
         </li>
         {/* Divider */}

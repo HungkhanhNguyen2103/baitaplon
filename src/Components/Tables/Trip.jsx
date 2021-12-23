@@ -36,7 +36,8 @@ export default function Trip(props) {
     setField({
       lotrinh : "",
       dodai : "",
-      dophuctap : ""
+      dophuctap : "",
+      idtuyenxe : '',
     })
   }
 
@@ -45,16 +46,13 @@ export default function Trip(props) {
     .then(res=>{
       setListRoute(res.data);
       setListRouteSave(res.data)
-      // console.log(res.data);
+      console.log(res.data);
     })
     .catch(err=>{
       console.log(err);
     })
   }, [])
 
-  // useEffect(() => {
-  //   props.handleToggleRoute();
-  // }, [props])
 
   const actionAddItem=(e)=>{
       const {name,value} = e.target;
@@ -100,6 +98,7 @@ export default function Trip(props) {
 
   //delete item
   const handleDelete=(value)=>{
+    console.log(value.idtuyenxe);
     swal({
       title: `Bạn có muốn xóa tuyến ${value.lotrinh}?`,
       icon: "warning",
@@ -130,6 +129,7 @@ export default function Trip(props) {
     setField(value)
     setToggleTask(true)
     setIsEdit(true)
+    window.scroll(0,0)
   }
 
   //Search
@@ -169,8 +169,8 @@ export default function Trip(props) {
                 <select className="form-control" onChange={actionAddItem} name="dophuctap" value={field.dophuctap}>
                   <option  className="d-none">Độ phức tạp</option>
                   <option value='1'>Small</option>
-                  <option value='2'>Medium</option>
-                  <option value='3'>High</option>
+                  <option value='1.1'>Medium</option>
+                  <option value='1.3'>High</option>
                 </select>
           </div>  
           <div className="col">
@@ -220,7 +220,7 @@ export default function Trip(props) {
                       {
                         item.dophuctap === 1 ? (
                           <span className="badge badge-success">small</span>
-                        ) : item.dophuctap === 2 ?  (
+                        ) : item.dophuctap === 1.1 ?  (
                           <span className="badge badge-warning">medium</span>
                         ) : (
                           <span className="badge badge-danger">high</span>

@@ -8,6 +8,8 @@ import Buses from "./Components/Tables/Buses";
 import Driver from "./Components/Tables/Driver";
 import Trip from "./Components/Tables/Trip";
 import { useState } from "react";
+import Pay from "./Components/Tables/Pay";
+import Turnover from "./Components/Tables/Turnover";
 
 function App() {
 
@@ -65,6 +67,8 @@ function App() {
               {/* End of Topbar */}
               <Routes>
                 <Route path="" element={<Home/>}/>
+                <Route path="/Turnover" element={<Turnover/>}/>
+                <Route path="/Pay" element={<Pay/>}/>
                 <Route path="tablesBus" element={<Bus handleToggleBus={handleToggleBus}/>}/>
                 <Route path="tablesBuses" element={<Buses handleToggleBuses={handleToggleBuses}/>}/>
                 <Route path="tablesDriver" element={<Driver handleToggleDriver={handleToggleDriver}/>}/>

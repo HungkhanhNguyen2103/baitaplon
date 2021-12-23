@@ -53,7 +53,6 @@ export default function Driver(props) {
     .then(res=>{
       setListDriver(res.data);
       setListDriverSave(res.data);
-      // console.log(res);
     })
     .catch(err=>{
       console.log(err);
@@ -145,6 +144,7 @@ export default function Driver(props) {
     setField(value)
     setToggleTask(true)
     setIsEdit(true)
+    window.scroll(0,0)
   }
 
   //Search

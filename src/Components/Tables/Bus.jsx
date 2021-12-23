@@ -50,6 +50,7 @@ export default function Bus(props) {
     })
   }
 
+
   useEffect(() => {
     axios.get(`http://localhost:8080/bus/all`)
     .then(res=>{
@@ -60,8 +61,8 @@ export default function Bus(props) {
     .catch(err=>{
       console.log(err);
     })
-    props.handleToggleBus()
   }, [])
+
 
   // useEffect(() => {
   //   props.handleToggleBus();
@@ -147,6 +148,7 @@ export default function Bus(props) {
     setField(value)
     setToggleTask(true)
     setIsEdit(true)
+    window.scroll(0,0)
   }
 
   //Search
@@ -170,7 +172,7 @@ export default function Bus(props) {
         actionSearch={actionSearch}
         handleSearch={handleSearch}
         />
-        {/* Topbar Navbar */}
+        {/* Topbar Navbar */} 
       </div>
       <div className={!toggleTask ? ("card shadow mb-4 close-form") : ("card shadow mb-4 show")}>
       <div className="card-header py-3 d-flex justify-content-center ">
