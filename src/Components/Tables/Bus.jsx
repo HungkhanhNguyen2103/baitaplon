@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from 'sweetalert';
 import Search from "../Search";
+import { formatDate } from "../../helper/helper";
 
 export default function Bus(props) {
 
@@ -262,7 +263,7 @@ export default function Bus(props) {
                       <td>{item.model}</td>
                       <td>{item.soghe}</td>
                       <td>{item.sonamsudung}</td>
-                      <td>{item.ngaybaoduong}</td>
+                      <td>{formatDate(item.ngaybaoduong)}</td>
                       <td>
                         <input
                           className="btn btn-warning"

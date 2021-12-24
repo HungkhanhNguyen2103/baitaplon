@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import swal from 'sweetalert';
 import Search from "../Search";
+import { formatDate } from "../../helper/helper";
 
 export default function Driver(props) {
 
@@ -18,6 +19,9 @@ export default function Driver(props) {
 
   //search
   const [searchKey,setSearchKey] = useState("")
+
+  //date
+  const [date, setDate] =useState()
 
   //lay truong input
   const [field,setField] = useState({
@@ -251,7 +255,7 @@ export default function Driver(props) {
                       <td>{item.mabang}</td>
                       <td>{item.loaibang}</td>
                       <td>{item.diachi}</td>
-                      <td>{item.ngaysinh}</td>
+                      <td>{formatDate(item.ngaysinh)}</td>
                       <td>{item.thamnien}</td>
                       <td>
                         <input

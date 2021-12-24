@@ -46,7 +46,7 @@ export default function Trip(props) {
     .then(res=>{
       setListRoute(res.data);
       setListRouteSave(res.data)
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch(err=>{
       console.log(err);
@@ -67,9 +67,15 @@ export default function Trip(props) {
     if(field.lotrinh === '' || field.dodai === '' || field.dophuctap === ''){
         swal("Nhập đầy đủ trường !")
        } 
-      //  console.log(field);  
+      const loTrinh = field.lotrinh.toLowerCase().replaceAll(" ","")
+      const checkLoTrinh = listRoute.every(item => item.lotrinh.toLowerCase().replaceAll(" ","") === loTrinh)  
+     if(checkLoTrinh && !isEdit){
+      swal("Lộ trình đã có !")
+     }
     else{
-        axios.post("http://localhost:8080/route",field)
+        
+          if(!isEdit){
+            axios.post("http://localhost:8080/route",field)
           .then(res =>{
               console.log(res);
           })
@@ -77,13 +83,20 @@ export default function Trip(props) {
               console.log(err);
           })
           setToggleTask(!toggleTask)
-          if(!isEdit){
             swal({
               title: "Thêm thành công !",
               icon: "success",
             });
           }
           else{
+            axios.put(`http://localhost:8080/route/${field.idtuyenxe}`,field)
+             .then(res =>{
+              console.log(res);
+            })
+           .catch(err=>{
+              console.log(err);
+           })
+            setToggleTask(!toggleTask)
             swal({
               title: "Sửa thành công !",
               icon: "success",

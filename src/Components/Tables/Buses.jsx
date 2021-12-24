@@ -163,7 +163,6 @@ export default function Buses() {
     e.preventDefault();
     console.log(field);
     const maso = listBus.every((item) => item.masochuyen !== field.masochuyen);
-    // const sonamsudung = Number(field.sonamsudung) % 1 === 0
     if (
       field.masochuyen === "" ||
       field.sokhach === "" ||
@@ -178,7 +177,8 @@ export default function Buses() {
     } else if (driver.idlaixe === driver.idphuxe) {
       swal("Lái xe và phụ xe là cùng một người !");
     } else {
-      axios
+      if(!isEdit){
+        axios
         .post("http://localhost:8080/buses", field)
         .then((res) => {
           console.log(res);
@@ -186,18 +186,26 @@ export default function Buses() {
         .catch((err) => {
           console.log(err);
         });
-      setToggleTask(!toggleTask);
-      if (!isEdit) {
         swal({
           title: "Thêm thành công !",
           icon: "success",
         });
-      } else {
+      }
+      else{
+        axios
+        .put(`http://localhost:8080/buses/${field.idchuyenxe}`, field)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
         swal({
           title: "Sửa thành công !",
           icon: "success",
         });
       }
+      setToggleTask(!toggleTask);
       setTimeout(() => {
         window.location.reload();
       }, 1600);
@@ -212,7 +220,7 @@ export default function Buses() {
       return findValue(routeValue,item.idtuyenxe)
     })
     setRouteSelect(arr)
-    window.scroll(0,1500);
+    window.scroll(0,2000);
     setField(value)
     // setDriver(value)
     // setRouteSelect(value)
@@ -275,6 +283,7 @@ export default function Buses() {
       idphuxe: "",
       idxekhach: "",
     });
+    setRouteSelect([])
     setToggleTask(!toggleTask);
   };
 
@@ -298,10 +307,6 @@ export default function Buses() {
     else if (searchKeyWord === "phuxe")
       setListBuses(
         listBusesSave.filter((item) => item.phuxe.ten.match(searchKey))
-      );
-    else if (searchKeyWord === "lotrinh")
-      setListBuses(
-        listBusesSave.filter((item) => item.lotrinh.lotrinh.match(searchKey))
       );
     else if (searchKeyWord === "bienso")
       setListBuses(
@@ -327,7 +332,6 @@ export default function Buses() {
               <option className="d-none">Tìm theo: </option>
               <option value="laixe">Lái xe</option>
               <option value="phuxe">Phụ xe</option>
-              <option value="lotrinh">Tuyến</option>
               <option value="bienso">Biển số</option>
             </select>
             <input
@@ -424,7 +428,7 @@ export default function Buses() {
                       <td>{item.xekhach.bienso}</td>
                       <td>{item.sokhach}</td>
                       <td>{item.xekhach.soghe - 2 - item.sokhach}</td>
-                      <td>{item.gia}</td>
+                      <td>{item.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                       <td>
                         <input
                           className="btn btn-warning"

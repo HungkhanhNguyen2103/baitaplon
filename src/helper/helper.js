@@ -18,3 +18,9 @@ export const findValue = (list, id) => {
         return null;
     }
 }
+
+//format 
+export const formatDate = (item) => {
+    const listDate =  [item.substring(8,10),item.substring(5,7),item.substring(0,4)]
+    return listDate.join('-')
+} 

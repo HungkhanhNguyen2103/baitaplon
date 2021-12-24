@@ -13,7 +13,7 @@ export default function Turnover() {
   //search
   const [searchKey, setSearchKey] = useState("");
 
-  const [listTur,setListTur] = useState([0])
+  const [sumTur,setSumTur] = useState(0)
 
   useEffect(() => {
 
@@ -26,7 +26,9 @@ export default function Turnover() {
         const arr = res.data.map(item=> {
           return item[3];
         })
-        setListTur(arr)
+        setSumTur(arr.reduce((total,currentValue) =>{
+          return total + currentValue
+        }))
       })
       .catch((err) => {
         console.log(err);
@@ -62,9 +64,7 @@ export default function Turnover() {
             DataTables Turnover
           </h6>
           <h6>
-            Tổng doanh thu : <span>{listTur.reduce((total,currentValue) =>{
-              return total + currentValue
-            })} đ</span>
+            Tổng doanh thu : <span>{sumTur.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} đ</span>
           </h6>
         </div>
         <div className="card-body">
@@ -98,7 +98,7 @@ export default function Turnover() {
                       <td>{item[0]}</td>
                       <td>{item[4]}</td>
                       <td>{item[2]}</td>
-                      <td>{item[3]}</td>
+                      <td>{item[3].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                     </tr>
                   ))
                 ) : (

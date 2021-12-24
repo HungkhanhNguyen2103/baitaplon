@@ -1,4 +1,3 @@
-import Home from "./Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./Components/Navigation";
 import Footer from "./Components/Footer";
@@ -20,29 +19,29 @@ function App() {
     route : false,
   })
 
-  const handleToggleRoute=()=>{
-    setToggleNav({
-      route : true,
-    })
-  }
+  // const handleToggleRoute=()=>{
+  //   setToggleNav({
+  //     route : true,
+  //   })
+  // }
 
-  const handleToggleBus=()=>{
-    setToggleNav({
-      bus : true,
-    })
-  }
+  // const handleToggleBus=()=>{
+  //   setToggleNav({
+  //     bus : true,
+  //   })
+  // }
 
-  const handleToggleBuses=()=>{
-    setToggleNav({
-      buses : true,
-    })
-  }
+  // const handleToggleBuses=()=>{
+  //   setToggleNav({
+  //     buses : true,
+  //   })
+  // }
 
-  const handleToggleDriver=()=>{
-    setToggleNav({
-      driver : true,
-    })
-  }
+  // const handleToggleDriver=()=>{
+  //   setToggleNav({
+  //     driver : true,
+  //   })
+  // }
 
 
   return (
@@ -66,13 +65,13 @@ function App() {
               </nav>
               {/* End of Topbar */}
               <Routes>
-                <Route path="" element={<Home/>}/>
+                <Route path="" element={<Trip/>}/>
                 <Route path="/Turnover" element={<Turnover/>}/>
                 <Route path="/Pay" element={<Pay/>}/>
-                <Route path="tablesBus" element={<Bus handleToggleBus={handleToggleBus}/>}/>
-                <Route path="tablesBuses" element={<Buses handleToggleBuses={handleToggleBuses}/>}/>
-                <Route path="tablesDriver" element={<Driver handleToggleDriver={handleToggleDriver}/>}/>
-                <Route path="tablesTrip" element={<Trip handleToggleRoute={handleToggleRoute}/>}/>
+                <Route path="tablesBus" element={<Bus/>}/>
+                <Route path="tablesBuses" element={<Buses/>}/>
+                <Route path="tablesDriver" element={<Driver/>}/>
+                <Route path="tablesTrip" element={<Trip/>}/>
               </Routes>
             </div>
             {/* End of Main Content */}

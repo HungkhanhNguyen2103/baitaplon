@@ -174,13 +174,13 @@ export default function Pay() {
                       <td>
                         {
                           item[2] <= 2 ? (
-                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe))*1.05).toFixed(0) 
+                            (((item[3].toFixed(2) * pay.phuxe ) + (item[5].toFixed(2) * pay.laixe ))*1.05).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                           ) : item[2] <= 5 ? (
-                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe))*1.1 ).toFixed(0)
+                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe  ))*1.1 ).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                           ) : item[3] <= 8 ? (
-                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe))*1.2).toFixed(0) 
+                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe  ))*1.2).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
                           ) : (
-                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe))*1.3).toFixed(0) 
+                            (((item[3].toFixed(2) * pay.phuxe) + (item[5].toFixed(2) * pay.laixe  ))*1.3).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
                           )
                         }
                       </td>
