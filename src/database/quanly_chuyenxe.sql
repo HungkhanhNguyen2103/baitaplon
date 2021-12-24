@@ -27,7 +27,6 @@ CREATE TABLE `chuyenxe` (
   `masochuyen` varchar(45) NOT NULL,
   `idlaixe` int NOT NULL,
   `idphuxe` int NOT NULL,
-  `idlotrinh` int NOT NULL,
   `idxekhach` int NOT NULL,
   `sokhach` int NOT NULL,
   `gia` int NOT NULL,
@@ -35,13 +34,11 @@ CREATE TABLE `chuyenxe` (
   UNIQUE KEY `masochuyen_UNIQUE` (`masochuyen`),
   KEY `fk_chuyenxe_laixe` (`idlaixe`),
   KEY `fk_chuyenxe_phuxe` (`idphuxe`),
-  KEY `fk_chuyenxe_lotrinh_idx` (`idlotrinh`) /*!80000 INVISIBLE */,
   KEY `fk_chuyenxe_xekhach_idx` (`idxekhach`),
   CONSTRAINT `fk_chuyenxe_laixe` FOREIGN KEY (`idlaixe`) REFERENCES `taixe` (`idtaixe`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_chuyenxe_lotrinh` FOREIGN KEY (`idlotrinh`) REFERENCES `tuyenxe` (`idtuyenxe`),
   CONSTRAINT `fk_chuyenxe_phuxe` FOREIGN KEY (`idphuxe`) REFERENCES `taixe` (`idtaixe`),
   CONSTRAINT `fk_chuyenxe_soghe` FOREIGN KEY (`idxekhach`) REFERENCES `xekhach` (`idxekhach`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +47,7 @@ CREATE TABLE `chuyenxe` (
 
 LOCK TABLES `chuyenxe` WRITE;
 /*!40000 ALTER TABLE `chuyenxe` DISABLE KEYS */;
-INSERT INTO `chuyenxe` VALUES (1,'TN1',1,3,1,1,16,60000),(2,'HT2',4,2,3,2,20,60000),(3,'HB3',1,4,5,14,28,120000);
+INSERT INTO `chuyenxe` VALUES (1,'TN1',1,2,1,16,60000),(2,'SB3',2,1,2,20,100000),(3,'AC4',3,4,22,11,130000),(4,'DG3',4,2,1,20,130000),(13,'NS2',1,3,14,24,120000),(18,'HS2',3,2,23,23,180000);
 /*!40000 ALTER TABLE `chuyenxe` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -63,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 23:38:50
+-- Dump completed on 2021-12-24  7:47:31

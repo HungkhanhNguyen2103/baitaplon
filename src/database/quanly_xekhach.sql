@@ -34,7 +34,7 @@ CREATE TABLE `xekhach` (
   `ngaybaoduong` date NOT NULL,
   PRIMARY KEY (`idxekhach`),
   UNIQUE KEY `bienso_UNIQUE` (`bienso`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `xekhach` (
 
 LOCK TABLES `xekhach` WRITE;
 /*!40000 ALTER TABLE `xekhach` DISABLE KEYS */;
-INSERT INTO `xekhach` VALUES (1,'29E12743','Nâu','Honda','2014','MV-2',20,7,'2020-12-12'),(2,'17B27381','Đỏ','Toyota','2016','AZ-123',24,5,'2021-06-30'),(14,'17E25321','Nâu','Honda','2015','AC-2',32,6,'2019-06-23'),(16,'17E25213','Nâu','Toyota','2015','AC-2',20,6,'2019-02-13'),(17,'21E25321','Nâu','Honda','2016','TF-1',24,5,'2018-06-21'),(18,'23E25321','Nâu','Honda','2016','TF-1',24,5,'2018-06-21'),(19,'30E12745','Nâu','Ford','2016','TF-1',32,5,'2020-10-12');
+INSERT INTO `xekhach` VALUES (1,'29E12743','Nâu','Honda','2016','MV-2',30,5,'2020-12-12'),(2,'17B27381','Đỏ','Toyota','2016','AZ-123',24,5,'2021-06-30'),(14,'17E25321','Nâu','Honda','2015','AC-2',32,6,'2019-06-23'),(16,'17E25213','Nâu','Toyota','2015','AC-2',20,6,'2019-02-13'),(17,'21E25321','Nâu','Honda','2016','TF-1',24,5,'2018-06-21'),(18,'23E25321','Nâu','Honda','2016','TF-1',24,5,'2018-06-21'),(19,'30E12745','Nâu','Ford','2016','TF-1',32,5,'2020-10-12'),(22,'29E12712','Nâu','Honda','2014','MV-2',30,7,'2020-12-12'),(23,'23A23212','Nâu','Honda','2015','AC-2',32,6,'2021-03-21');
 /*!40000 ALTER TABLE `xekhach` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 23:38:49
+-- Dump completed on 2021-12-24  7:47:31

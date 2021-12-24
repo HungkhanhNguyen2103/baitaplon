@@ -26,9 +26,12 @@ CREATE TABLE `tuyenxe` (
   `idtuyenxe` int NOT NULL AUTO_INCREMENT,
   `lotrinh` varchar(45) NOT NULL,
   `dodai` int NOT NULL,
-  `dophuctap` int NOT NULL,
-  PRIMARY KEY (`idtuyenxe`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `dophuctap` float NOT NULL,
+  `idchuyenxe` int DEFAULT NULL,
+  PRIMARY KEY (`idtuyenxe`),
+  KEY `fk_tuyenxe_chuyenxe_idx` (`idchuyenxe`),
+  CONSTRAINT `fk_tuyenxe_chuyenxe` FOREIGN KEY (`idchuyenxe`) REFERENCES `chuyenxe` (`idchuyenxe`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +40,7 @@ CREATE TABLE `tuyenxe` (
 
 LOCK TABLES `tuyenxe` WRITE;
 /*!40000 ALTER TABLE `tuyenxe` DISABLE KEYS */;
-INSERT INTO `tuyenxe` VALUES (1,'Thái Bình - Hà Nội',105,1),(2,'Thanh Hóa - Hà Nội',150,3),(3,'Hải Phòng - Thái Bình',80,1),(4,'Hải Phòng - Quảng Ninh',50,2),(5,'Hà Nội - Điện Biên',450,3);
+INSERT INTO `tuyenxe` VALUES (1,'Thái Bình - Hà Nội',105,1,NULL),(2,'Thanh Hóa - Hà Nội',150,1.1,18),(8,'Hà Nội - Điện Biên',450,1.3,1),(15,'Thái Bình - Quảng Ninh',105,1,2),(17,'Thái Bình - Hải Phòng',80,1,4),(18,'Thanh Hóa - Hải Phòng',110,1.1,18),(20,'Hải Phòng - Hà Nội',105,1,3);
 /*!40000 ALTER TABLE `tuyenxe` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 23:38:50
+-- Dump completed on 2021-12-24  7:47:31

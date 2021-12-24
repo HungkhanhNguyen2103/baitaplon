@@ -35,7 +35,7 @@ CREATE TABLE `taixe` (
   UNIQUE KEY `idtaixe_UNIQUE` (`idtaixe`),
   UNIQUE KEY `cccd_UNIQUE` (`cccd`),
   UNIQUE KEY `mabang_UNIQUE` (`mabang`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `taixe` (
 
 LOCK TABLES `taixe` WRITE;
 /*!40000 ALTER TABLE `taixe` DISABLE KEYS */;
-INSERT INTO `taixe` VALUES (1,'Hưng',10349367,9547,'C1','Thái Bình','1986-03-21',5),(2,'Hùng',12187423,92873,'E1','Hà Nội','1983-06-21',3),(3,'Nguyễn Bảo Ngọc',26174612,98737,'B2','Thái Nguyên','1987-10-23',2),(4,'Vương',23746512,26452,'A1','Hải Phòng','1989-05-28',4);
+INSERT INTO `taixe` VALUES (1,'Hưng',10349367,9547,'C1','Thái Bình','1986-03-21',6),(2,'Hùng',12187423,92873,'E1','Hà Nội','1983-06-21',3),(3,'Nguyễn Bảo Ngọc',26174612,98737,'B2','Thái Nguyên','1987-10-23',2),(4,'Vương',23746512,26452,'A1','Hải Phòng','1989-05-28',4),(7,'Hưng Khánh',10349343,9532,'C2','Thái Bình','1986-03-21',10);
 /*!40000 ALTER TABLE `taixe` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 23:38:50
+-- Dump completed on 2021-12-24  7:47:30
